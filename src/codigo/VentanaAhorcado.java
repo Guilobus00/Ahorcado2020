@@ -19,6 +19,9 @@ public class VentanaAhorcado extends javax.swing.JFrame {
     //Esta variable guarda cuántos fallos llevo en el juego
     int numeroFallos = 0;
     
+    //Indica si la partida ha terminado
+    boolean partidaTerminada = false;
+    
     //La palabra irá siempre en MAYÚSCULA
     String palabraOculta = eligePalabra();
     
@@ -52,8 +55,10 @@ public class VentanaAhorcado extends javax.swing.JFrame {
     //Este método recibe el botón que ha sido pulsado
     //y procesa la letra que tiene en su etiqueta
     private void chequeaBoton( JButton boton){
-        boton.setEnabled(false);
-        chequeaLetra(boton.getText());
+        if(!partidaTerminada){
+            boton.setEnabled(false);
+            chequeaLetra(boton.getText());
+        }
     }
 
     private void chequeaLetra(String letra){
@@ -76,11 +81,15 @@ public class VentanaAhorcado extends javax.swing.JFrame {
             if (!palabraConGuiones.contains("_")){
                 numeroFallos = -1;
                 dibujaImagen();
+                partidaTerminada = true;
             }
         }
         
         else {
             numeroFallos++;
+            if (numeroFallos == 6){
+                partidaTerminada = true;
+            }
             dibujaImagen();
         }
         
@@ -158,7 +167,7 @@ public class VentanaAhorcado extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Palabra.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        Palabra.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         Palabra.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Palabra.setText("_ _ _ _ _");
         Palabra.setToolTipText("");
@@ -417,7 +426,7 @@ public class VentanaAhorcado extends javax.swing.JFrame {
                                         .addComponent(LetraK, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(LetraL, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 10, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -447,17 +456,16 @@ public class VentanaAhorcado extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(LetraV, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(LetraW, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(LetraW, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(LetraX, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(LetraY, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(LetraZ, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(104, 104, 104)))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LetraX, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(LetraY, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(LetraZ, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
